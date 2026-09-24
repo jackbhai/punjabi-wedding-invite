@@ -1,0 +1,857 @@
+/* ═══ Wedding Invite — global styles. All colors come from theme vars. ═══ */
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+html, body {
+  margin: 0; padding: 0;
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: var(--bg, #fff5f7);
+  color: var(--text, #4a1025);
+  overflow-x: hidden;
+  transition: background .5s ease, color .5s ease;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 0%, var(--bg2, #ffe4ec) 0%, transparent 60%),
+              radial-gradient(90% 70% at 50% 110%, var(--card-glow, rgba(0,0,0,.06)) 0%, transparent 60%);
+}
+#root { position: relative; z-index: 1; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+
+.font-script { font-family: 'Great Vibes', cursive; }
+.font-serif { font-family: 'Cormorant Garamond', 'Playfair Display', serif; }
+
+.wrap { width: 100%; max-width: 480px; margin: 0 auto; padding: 0 18px; }
+.section { padding: 56px 0; position: relative; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 30px; border-radius: 999px; border: none; cursor: pointer;
+  font-weight: 600; font-size: 16px; color: var(--btn-text);
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  box-shadow: 0 8px 24px var(--card-glow), var(--glow, none);
+  transition: transform .18s ease, box-shadow .18s ease;
+  text-decoration: none; min-height: 52px;
+}
+.btn:active { transform: scale(.96); }
+.btn-outline {
+  background: transparent; color: var(--primary);
+  border: 2px solid var(--primary); box-shadow: none;
+}
+
+/* ── Glass cards ── */
+.gcard {
+  background: color-mix(in srgb, var(--card) 82%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  border-radius: 22px; padding: 26px 22px;
+  box-shadow: 0 12px 40px var(--card-glow);
+}
+
+/* ── Section titles ── */
+.eyebrow {
+  display: inline-block; font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--primary); font-weight: 600; margin-bottom: 10px;
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  padding: 6px 16px; border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+.stitle { font-family: 'Great Vibes', cursive; font-size: clamp(38px, 10vw, 52px); margin: 6px 0 8px; color: var(--primary); line-height: 1.1; }
+.ssub { color: var(--muted); font-size: 15px; line-height: 1.6; margin: 0 0 26px; }
+
+/* ── Hero / cover ── */
+.hero {
+  min-height: 100svh; display: flex; align-items: center; justify-content: center;
+  text-align: center; position: relative; overflow: hidden; padding: 70px 18px 60px;
+}
+.hero-frame {
+  position: relative; width: 100%; max-width: 430px;
+  padding: 44px 26px 40px; border-radius: 28px;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  border: 2px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  box-shadow: 0 20px 60px var(--card-glow), inset 0 0 0 8px color-mix(in srgb, var(--gold) 12%, transparent);
+  transform-style: preserve-3d; will-change: transform;
+}
+.hero-names { font-family: 'Great Vibes', cursive; font-size: clamp(46px, 13vw, 68px); color: var(--primary); margin: 12px 0 4px; line-height: 1.15; }
+.hero-amp { font-family: 'Great Vibes', cursive; font-size: 34px; color: var(--gold); }
+.hero-date { font-family: 'Cormorant Garamond', serif; font-size: 21px; letter-spacing: 1px; color: var(--text); margin-top: 10px; }
+.hero-venue { color: var(--muted); font-size: 14px; margin-top: 6px; }
+.hero-img-ring {
+  width: 168px; height: 168px; margin: 0 auto; border-radius: 50%; padding: 6px;
+  background: conic-gradient(from 0deg, var(--gold), var(--primary), var(--gold-soft), var(--gold));
+  animation: spinRing 14s linear infinite;
+}
+.hero-img-ring > div { width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--bg2); }
+.hero-img-ring img { width: 100%; height: 100%; object-fit: cover; }
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.img-fallback {
+  width: 100%; height: 100%; min-height: 180px; border-radius: 18px;
+  background: linear-gradient(135deg, var(--primary), var(--accent), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px; color: #fff;
+}
+
+/* typewriter caret */
+.caret::after { content: '▍'; animation: blink 1s steps(1) infinite; color: var(--gold); }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ── Countdown flip ── */
+.flip-row { display: flex; gap: 10px; justify-content: center; margin: 18px 0; }
+.flip-unit { text-align: center; }
+.flip-card {
+  width: 70px; height: 84px; border-radius: 14px; position: relative; overflow: hidden;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card) 95%, #000), var(--card));
+  border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  box-shadow: 0 8px 22px var(--card-glow);
+  display: flex; align-items: center; justify-content: center;
+}
+.flip-card::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: rgba(0,0,0,.18); }
+.flip-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--primary); }
+.flip-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+/* ── Marquee ── */
+.marquee { overflow: hidden; white-space: nowrap; padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--gold) 30%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--gold) 30%, transparent); background: color-mix(in srgb, var(--primary) 6%, transparent); }
+.marquee-track { display: inline-flex; gap: 44px; animation: marquee var(--mq-speed, 22s) linear infinite; padding-right: 44px; }
+.marquee-item { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--primary); font-weight: 600; }
+@keyframes marquee { to { transform: translateX(-100%); } }
+
+/* ── Event cards ── */
+.event-grid { display: grid; gap: 18px; }
+.event-card { display: flex; gap: 16px; align-items: center; text-align: left; }
+.event-emoji { font-size: 44px; flex: 0 0 64px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 18px; background: color-mix(in srgb, var(--primary) 10%, transparent); border: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); }
+.event-card h3 { margin: 0 0 4px; font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--primary); }
+.event-card p { margin: 2px 0; font-size: 13.5px; color: var(--muted); }
+
+/* ── Cartoon scenes ── */
+.scene-card { overflow: hidden; text-align: center; padding: 0 0 22px; }
+.scene-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 22px 22px 0 0; }
+.scene-card h3 { font-family: 'Great Vibes', cursive; font-size: 34px; color: var(--primary); margin: 16px 0 6px; }
+.scene-card p { color: var(--muted); font-size: 14.5px; padding: 0 20px; margin: 0; line-height: 1.6; }
+
+/* ── RSVP form ── */
+.field { margin-bottom: 14px; text-align: left; }
+.field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; letter-spacing: .5px; }
+.field input, .field select, .field textarea {
+  width: 100%; padding: 14px 16px; border-radius: 14px; font-size: 16px; font-family: inherit;
+  border: 1.5px solid color-mix(in srgb, var(--gold) 35%, transparent);
+  background: color-mix(in srgb, var(--card) 90%, transparent); color: var(--text);
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent); }
+.seg { display: flex; gap: 10px; }
+.seg button { flex: 1; padding: 13px; border-radius: 14px; border: 1.5px solid color-mix(in srgb, var(--gold) 35%, transparent); background: transparent; color: var(--text); font-size: 15px; font-weight: 600; cursor: pointer; }
+.seg button.on { background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--btn-text); border-color: transparent; }
+
+/* ── Guest banner ── */
+.guest-banner {
+  margin: 14px 18px 0; padding: 18px 20px; border-radius: 20px; text-align: center;
+  background: linear-gradient(110deg, color-mix(in srgb, var(--gold) 22%, transparent), color-mix(in srgb, var(--primary) 14%, transparent), color-mix(in srgb, var(--gold) 22%, transparent));
+  background-size: 200% 100%; animation: shimmer 3.2s linear infinite;
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  box-shadow: 0 8px 30px var(--card-glow);
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+.guest-banner h2 { font-family: 'Great Vibes', cursive; font-size: 36px; margin: 0; color: var(--primary); }
+.guest-banner p { margin: 6px 0 0; font-size: 14px; color: var(--muted); font-style: italic; }
+
+/* ── Floating UI ── */
+.fab-music {
+  position: fixed; right: 16px; bottom: 20px; z-index: 60; width: 56px; height: 56px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent); cursor: pointer; font-size: 24px;
+  background: color-mix(in srgb, var(--card) 88%, transparent); backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px var(--card-glow); color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.fab-music.playing { animation: pulseMusic 1.6s ease-in-out infinite; }
+@keyframes pulseMusic { 50% { transform: scale(1.1); box-shadow: var(--glow); } }
+
+.scroll-hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 12px; letter-spacing: 2px; animation: bob 2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translate(-50%, 8px); } }
+
+/* ── Venue ── */
+.venue-map { width: 100%; height: 190px; border: 0; border-radius: 16px; margin-top: 14px; }
+
+/* ── Footer ── */
+.footer { text-align: center; padding: 60px 18px 90px; }
+.footer-names { font-family: 'Great Vibes', cursive; font-size: 40px; color: var(--primary); }
+
+/* ── Petal canvas ── */
+.petal-canvas { position: fixed; inset: 0; pointer-events: none; }
+
+/* ── Reveal defaults (framer-motion handles the rest) ── */
+.reveal-hidden { opacity: 0; }
+
+/* ═══ ADMIN ═══ */
+.admin { min-height: 100svh; background: #14121a; color: #ece9f5; font-family: 'Poppins', sans-serif; }
+.admin a { color: #c9a6ff; }
+.admin-top {
+  position: sticky; top: 0; z-index: 50; display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; background: rgba(20,18,26,.92); backdrop-filter: blur(10px);
+  border-bottom: 1px solid #2c2838;
+}
+.admin-top h1 { font-size: 17px; margin: 0; font-weight: 700; }
+.admin-top .sub { font-size: 11px; color: #9b93b3; }
+.admin-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px; border-bottom: 1px solid #2c2838; position: sticky; top: 61px; background: #14121a; z-index: 40; }
+.admin-tabs button {
+  flex: 0 0 auto; padding: 10px 16px; border-radius: 999px; border: 1px solid #3a3550;
+  background: #1d1a28; color: #cfc9e3; font-size: 13.5px; font-weight: 600; cursor: pointer;
+}
+.admin-tabs button.on { background: linear-gradient(135deg, #8b5cf6, #ec4899); color: #fff; border-color: transparent; }
+.admin-body { padding: 18px 16px 80px; max-width: 860px; margin: 0 auto; }
+.acard { background: #1d1a28; border: 1px solid #2e2a40; border-radius: 16px; padding: 18px; margin-bottom: 16px; }
+.acard h3 { margin: 0 0 4px; font-size: 16px; }
+.acard .hint { font-size: 12.5px; color: #9b93b3; margin: 0 0 12px; }
+.afield { margin-bottom: 12px; }
+.afield label { display: block; font-size: 12px; font-weight: 600; color: #b7aecb; margin-bottom: 5px; }
+.afield input, .afield textarea, .afield select {
+  width: 100%; padding: 11px 13px; border-radius: 10px; font-size: 14px;
+  background: #14121a; border: 1px solid #3a3550; color: #ece9f5; font-family: inherit;
+}
+.afield textarea { min-height: 74px; resize: vertical; }
+.abtn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 12px;
+  border: none; cursor: pointer; font-weight: 600; font-size: 14px; color: #fff;
+  background: linear-gradient(135deg, #8b5cf6, #ec4899); min-height: 44px;
+}
+.abtn:active { transform: scale(.97); }
+.abtn.ghost { background: #2a2638; border: 1px solid #3a3550; }
+.abtn.danger { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.abtn.small { padding: 8px 14px; font-size: 12.5px; min-height: 36px; }
+.arow { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.atable { width: 100%; border-collapse: collapse; font-size: 13px; }
+.atable th, .atable td { text-align: left; padding: 10px 8px; border-bottom: 1px solid #2c2838; vertical-align: top; }
+.atable th { color: #9b93b3; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+.badge.opened { background: rgba(34,197,94,.15); color: #4ade80; }
+.badge.pending { background: rgba(251,191,36,.15); color: #fbbf24; }
+.badge.offline { background: rgba(239,68,68,.18); color: #f87171; }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #2c2838; }
+.toggle-row:last-child { border-bottom: none; }
+.toggle-row .tlabel { font-size: 14px; font-weight: 600; }
+.toggle-row .tdesc { font-size: 12px; color: #9b93b3; }
+.switch { position: relative; width: 52px; height: 30px; flex: 0 0 auto; cursor: pointer; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.switch .sl { position: absolute; inset: 0; border-radius: 999px; background: #3a3550; transition: .2s; }
+.switch .sl::before { content: ''; position: absolute; width: 22px; height: 22px; border-radius: 50%; background: #fff; top: 4px; left: 4px; transition: .2s; }
+.switch input:checked + .sl { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+.switch input:checked + .sl::before { transform: translateX(22px); }
+.theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+.theme-card { border-radius: 14px; overflow: hidden; border: 2px solid #2e2a40; cursor: pointer; background: #14121a; }
+.theme-card.on { border-color: #a78bfa; box-shadow: 0 0 0 3px rgba(167,139,250,.25); }
+.theme-swatch { height: 74px; }
+.theme-card .tname { padding: 10px 12px; font-size: 13px; font-weight: 700; }
+.theme-card .tdesc { padding: 0 12px 12px; font-size: 11px; color: #9b93b3; }
+.login-box { max-width: 400px; margin: 12vh auto 0; }
+.link-preview { word-break: break-all; font-size: 12px; background: #14121a; border: 1px dashed #3a3550; border-radius: 10px; padding: 10px 12px; color: #c9a6ff; margin-top: 10px; }
+.offline-bar { background: rgba(239,68,68,.12); border: 1px solid rgba(239,68,68,.4); color: #fca5a5; padding: 10px 16px; border-radius: 12px; font-size: 13px; margin-bottom: 14px; }
+.ok-bar { background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.35); color: #86efac; padding: 10px 16px; border-radius: 12px; font-size: 13px; margin-bottom: 14px; }
+
+/* reduced motion: kill petal canvas + heavy anims */
+@media (prefers-reduced-motion: reduce) {
+  .petal-canvas { display: none; }
+  .marquee-track { animation: none; }
+  .hero-img-ring { animation: none; }
+  .guest-banner { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+@media (min-width: 700px) {
+  .wrap { max-width: 640px; }
+  .event-grid { grid-template-columns: 1fr 1fr; }
+  .scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+}
+
+/* ═════════ LUXURY CARD EXPERIENCE ═════════ */
+.lux-root { min-height: 100svh; position: relative; overflow-x: hidden; }
+
+/* gold gradient text */
+.gold-text {
+  background: linear-gradient(100deg, var(--gold-deep) 0%, var(--gold) 25%, var(--gold-soft) 50%, var(--gold) 75%, var(--gold-deep) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* animated shimmer sweep on text */
+.shimmer-text {
+  background: linear-gradient(100deg, var(--gold-deep) 10%, var(--gold) 35%, #fff8e1 50%, var(--gold) 65%, var(--gold-deep) 90%);
+  background-size: 220% auto;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmerText 5s linear infinite;
+}
+@keyframes shimmerText { to { background-position: 220% center; } }
+
+/* gold dust canvas */
+.gold-canvas { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+
+/* rotating mandala */
+.mandala-spin { animation: mandalaSpin var(--mandala-dur, 90s) linear infinite; color: var(--gold); }
+@keyframes mandalaSpin { to { transform: rotate(360deg); } }
+
+/* ── ENVELOPE SCREEN ── */
+.envelope-screen {
+  min-height: 100svh; display: flex; align-items: center; justify-content: center;
+  padding: 40px 16px 60px; position: relative; overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, transparent 55%),
+    radial-gradient(100% 70% at 50% 110%, rgba(0,0,0,.55) 0%, transparent 60%),
+    var(--bg);
+}
+.envelope-wrap { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; }
+.envelope-scene { perspective: 1400px; width: min(350px, 88vw); }
+.envelope {
+  position: relative; width: 100%; aspect-ratio: 1.3;
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 30px 50px rgba(0,0,0,.55));
+}
+.env-back {
+  position: absolute; inset: 0; border-radius: 14px; z-index: 1;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(212,175,55,.10) 0 8px, transparent 9px),
+    radial-gradient(circle at 80% 70%, rgba(212,175,55,.10) 0 8px, transparent 9px),
+    linear-gradient(160deg, #4a1626 0%, #2b0d18 60%, #1c0811 100%);
+  border: 1px solid color-mix(in srgb, var(--gold-deep) 70%, transparent);
+}
+.env-letter {
+  position: absolute; left: 7%; right: 7%; top: 6%; bottom: 6%; z-index: 2;
+  border-radius: 8px; overflow: hidden;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, var(--paper2) 100%);
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 12px;
+}
+.env-letter-glow { position: absolute; inset: 0; background: radial-gradient(80% 60% at 50% 40%, rgba(246,226,122,.35), transparent 70%); }
+.env-letter-names { font-size: 30px; color: var(--paper-text); margin: 0; line-height: 1.2; position: relative; }
+.env-letter-date { font-family: 'Cormorant Garamond', serif; font-size: 14px; letter-spacing: 1px; color: var(--paper-muted); margin: 8px 0 0; position: relative; }
+.env-pocket {
+  position: absolute; inset: 0; z-index: 3; border-radius: 14px;
+  clip-path: polygon(0 26%, 50% 52%, 100% 26%, 100% 100%, 0 100%);
+  background:
+    repeating-radial-gradient(circle at 50% 120%, rgba(212,175,55,.07) 0 2px, transparent 3px 14px),
+    linear-gradient(180deg, #571c2e 0%, #3a1220 45%, #260b15 100%);
+}
+.env-frame {
+  position: absolute; inset: 9px; z-index: 4; border-radius: 10px; pointer-events: none;
+  border: 2px solid color-mix(in srgb, var(--gold) 75%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--gold) 35%, transparent); outline-offset: 4px;
+}
+.env-flap {
+  position: absolute; top: 0; left: 0; right: 0; height: 34%; z-index: 5;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center; backface-visibility: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(212,175,55,.14) 0 10px, transparent 11px),
+    linear-gradient(180deg, #631f34 0%, #471524 70%, #381020 100%);
+}
+.env-seal-pos { position: absolute; top: 34%; left: 50%; transform: translate(-50%, -50%); z-index: 6; }
+.wax-seal {
+  position: relative; width: 68px; height: 68px; border-radius: 50%; border: none; cursor: pointer;
+  background: radial-gradient(circle at 35% 28%, #f87171 0%, #c0392b 34%, #8e1f1f 62%, #5f1212 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(255,255,255,.35),
+    inset 0 -6px 12px rgba(0,0,0,.5),
+    0 8px 22px rgba(0,0,0,.55);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold-soft);
+}
+.wax-seal::before {
+  content: ''; position: absolute; inset: 9px; border-radius: 50%;
+  border: 2px solid rgba(246,226,122,.65);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,.4);
+}
+.wax-mono {
+  font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 17px; letter-spacing: 1px;
+  display: flex; align-items: center; gap: 3px; text-shadow: 0 1px 3px rgba(0,0,0,.6);
+  position: relative; z-index: 1;
+}
+.wax-heart { color: var(--gold-soft); }
+.seal-pulse {
+  position: absolute; inset: -7px; border-radius: 50%;
+  border: 2px solid var(--gold-soft); opacity: 0;
+  animation: sealPulse 2s ease-out infinite;
+}
+@keyframes sealPulse { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.35); opacity: 0; } }
+.seal-shards { position: relative; width: 68px; height: 68px; }
+.seal-shards .shard {
+  position: absolute; top: 0; width: 34px; height: 68px;
+  background: radial-gradient(circle at 35% 28%, #f87171 0%, #c0392b 40%, #5f1212 100%);
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,.5);
+}
+.seal-shards .shard.left { left: 0; border-radius: 34px 0 0 34px; }
+.seal-shards .shard.right { right: 0; border-radius: 0 34px 34px 0; }
+
+/* front print: lives in the pocket zone fully BELOW the wax seal —
+   the seal can never cover any text. overflow:hidden guarantees
+   nothing bleeds outside the envelope. */
+.env-front {
+  position: absolute; left: 0; right: 0; top: 50%; bottom: 0; z-index: 4; pointer-events: none;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  text-align: center; padding: 0 14px 5%; overflow: hidden;
+}
+/* ── Ganesh medallion: own clear space ABOVE the envelope, fully in front
+   (z-index above the whole envelope), never clipped by it. Static webp is
+   ALWAYS the base layer (never hidden); the ambient loop video fades in on
+   top only when it actually plays. ── */
+.env-ganesh {
+  position: relative; z-index: 20; flex: 0 0 auto;
+  width: 120px; height: 120px; border-radius: 50%;
+  margin-bottom: -24px; /* medallion rests on the envelope's top edge, in front */
+  border: 2px solid color-mix(in srgb, var(--gold) 85%, transparent);
+  box-shadow: 0 0 26px rgba(212,175,55,.55), inset 0 0 18px rgba(212,175,55,.18);
+  background: radial-gradient(circle, rgba(70,24,36,.6) 0%, rgba(30,10,16,.35) 68%, transparent 72%);
+  color: var(--gold-soft);
+}
+.env-ganesh-img {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1;
+  object-fit: contain; border-radius: 50%;
+}
+.env-ganesh-video {
+  position: absolute; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px);
+  object-fit: contain; z-index: 2; opacity: 0; transition: opacity .9s ease;
+  background: transparent; filter: drop-shadow(0 4px 12px rgba(212,175,55,.5));
+  pointer-events: none;
+}
+.env-ganesh-video.on { opacity: 1; }
+.env-headline {
+  font-family: 'Cormorant Garamond', serif; font-size: 12px; letter-spacing: 1px;
+  color: var(--gold-soft); margin: 0 auto 2px; text-shadow: 0 1px 8px rgba(0,0,0,.6);
+  max-width: 94%; overflow-wrap: anywhere; text-wrap: balance;
+}
+/* couple names: elegant READABLE serif (not the loopy script) with gold shimmer */
+.env-names {
+  font-family: 'Cormorant Garamond', serif; font-weight: 600; letter-spacing: .5px;
+  font-size: clamp(18px, 5.2vw, 27px); margin: 2px auto; line-height: 1.18;
+  max-width: 94%; text-wrap: balance; overflow-wrap: anywhere;
+}
+.env-sub {
+  font-size: 10px; letter-spacing: 4px; color: var(--gold); margin: 4px auto 0; font-weight: 600;
+  max-width: 94%; overflow-wrap: anywhere;
+}
+.env-subtext { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12px; color: var(--muted); margin: 3px auto 0; max-width: 94%; overflow-wrap: anywhere; text-wrap: balance; }
+.env-guest {
+  margin: 5px auto 0; font-family: 'Cormorant Garamond', serif; font-size: 13px;
+  color: var(--gold-soft); border-top: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  padding-top: 4px; letter-spacing: .5px;
+  max-width: 94%; overflow-wrap: anywhere; text-wrap: balance;
+}
+.env-hint { margin-top: 26px; color: var(--gold-soft); font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; }
+
+/* ── CARD DECK ── */
+.deck-screen { min-height: 100svh; position: relative; padding: 26px 0 46px; overflow: hidden; }
+.deck-mandala {
+  position: absolute; top: -140px; left: 50%; transform: translateX(-50%);
+  opacity: 0.16; pointer-events: none;
+}
+.deck-top { text-align: center; position: relative; z-index: 3; margin-bottom: 14px; padding: 0 18px; }
+.deck-eyebrow { font-size: 11px; letter-spacing: 6px; text-transform: uppercase; color: var(--gold); margin: 0; font-weight: 600; }
+.deck-guest { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: var(--gold-soft); margin: 8px auto 0; max-width: 92%; overflow-wrap: anywhere; text-wrap: balance; }
+.deck-dots { display: flex; gap: 10px; justify-content: center; margin-top: 12px; }
+.deck-dot {
+  width: 9px; height: 9px; border-radius: 50%; border: 1px solid var(--gold);
+  background: transparent; cursor: pointer; padding: 0; transition: .25s;
+}
+.deck-dot.on { background: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.25); }
+.deck-stage { position: relative; width: min(430px, 94vw); height: min(78svh, 640px); margin: 0 auto; z-index: 3; }
+.deck-peek { position: absolute; inset: 0; transform: scale(.93) translateY(16px); opacity: .55; filter: blur(1px); pointer-events: none; }
+.deck-peek .lux-card { height: 100%; }
+.deck-card { position: absolute; inset: 0; touch-action: pan-y; cursor: grab; }
+.deck-card:active { cursor: grabbing; }
+.deck-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+  width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent);
+  color: var(--gold-soft); display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(6px); box-shadow: 0 6px 18px rgba(0,0,0,.4);
+}
+.deck-arrow.left { left: -8px; }
+.deck-arrow.right { right: -8px; }
+.deck-arrow:active { transform: translateY(-50%) scale(.92); }
+.deck-hint { text-align: center; color: var(--gold-soft); font-size: 12.5px; letter-spacing: 2px; margin-top: 16px; position: relative; z-index: 3; }
+
+/* ── luxury card chrome ── */
+.lux-card {
+  position: relative; height: 100%; overflow-y: auto; overscroll-behavior: contain;
+  border-radius: 18px; padding: 30px 24px 26px;
+  color: var(--paper-text);
+  background:
+    radial-gradient(140% 100% at 50% 0%, rgba(212,175,55,.10) 0%, transparent 55%),
+    repeating-linear-gradient(0deg, rgba(120,85,30,.028) 0 1px, transparent 1px 4px),
+    linear-gradient(170deg, var(--paper) 0%, var(--paper2) 100%);
+  border: 2px solid color-mix(in srgb, var(--gold) 80%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+  outline-offset: 6px;
+  box-shadow: 0 26px 60px rgba(0,0,0,.5), inset 0 0 40px rgba(160,110,40,.08);
+  scrollbar-width: thin; scrollbar-color: var(--gold-deep) transparent;
+}
+.lux-corner { position: absolute; width: 46px; height: 46px; color: var(--gold-deep); opacity: .9; z-index: 2; pointer-events: none; }
+.lux-corner.c-tl { top: 10px; left: 10px; }
+.lux-corner.c-tr { top: 10px; right: 10px; transform: rotate(90deg); }
+.lux-corner.c-br { bottom: 10px; right: 10px; transform: rotate(180deg); }
+.lux-corner.c-bl { bottom: 10px; left: 10px; transform: rotate(270deg); }
+.lux-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+.lux-rule { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-deep), transparent); }
+.lux-head-icon { color: var(--gold-deep); flex: 0 0 auto; }
+.lux-title {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(15px, 4.6vw, 22px); font-weight: 700;
+  letter-spacing: clamp(2px, 0.8vw, 4px); text-transform: uppercase; color: var(--paper-text); margin: 0; white-space: nowrap;
+  max-width: 100%;
+}
+.lux-body { position: relative; z-index: 1; }
+.lux-foot { margin-top: 20px; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--gold-deep) 35%, transparent); }
+.lux-foot-note { text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--paper-muted); margin: 0; }
+
+/* family card */
+.lux-blessing { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 16px; letter-spacing: 1px; color: var(--paper-muted); margin: 0 0 6px; }
+.lux-grandparents { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--paper-text); margin: 0 0 10px; }
+.lux-parents { text-align: center; font-size: 13.5px; line-height: 1.7; color: var(--paper-muted); margin: 0 0 10px; }
+.lux-invite-word { text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--paper-muted); margin: 0 0 6px; }
+.lux-couple {
+  text-align: center; font-size: clamp(44px, 12vw, 58px); line-height: 1.3; margin: 4px 0 10px;
+}
+.lux-amp { font-size: 0.62em; }
+.lux-verse { text-align: center; margin: 6px 0 18px; }
+.lux-verse p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16.5px; line-height: 1.65; color: var(--paper-text); margin: 2px 0; }
+
+/* arch frame */
+.arch-frame { margin: 6px auto 4px; max-width: 300px; }
+.arch-inner {
+  position: relative; overflow: hidden; width: 100%; height: 100%;
+  border-radius: 999px 999px 16px 16px;
+  border: 3px solid color-mix(in srgb, var(--gold) 85%, transparent);
+  outline: 1px solid color-mix(in srgb, var(--gold-deep) 50%, transparent); outline-offset: 5px;
+  box-shadow: 0 14px 34px rgba(90,55,10,.28), inset 0 0 30px rgba(0,0,0,.12);
+  background: transparent; /* transparent so alpha video subjects float cleanly */
+}
+.arch-media { width: 100%; height: 100%; display: block; }
+img.arch-media { object-fit: cover; }
+/* video: NEVER crop the subject — transparent letterbox is invisible on alpha video */
+video.arch-media { object-fit: contain; background: transparent; filter: drop-shadow(0 8px 14px rgba(60,35,5,.35)); }
+.arch-media.kenburns { animation: kenburns 16s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform: scale(1) translate(0,0); } to { transform: scale(1.14) translate(-1.5%, -2%); } }
+.arch-fallback { background: linear-gradient(135deg, var(--gold-deep), var(--gold-soft), var(--gold-deep)); min-height: 100%; }
+.arch-sheen {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.22) 45%, transparent 60%);
+  background-size: 250% 250%; animation: sheen 7s ease-in-out infinite;
+}
+@keyframes sheen { 0%,100% { background-position: 120% 0; } 50% { background-position: -20% 0; } }
+.arch-caption { text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 15px; letter-spacing: 1px; color: var(--paper-muted); margin: 10px 0 0; }
+
+/* diya row */
+.diya-row { display: flex; justify-content: center; gap: 10px; color: var(--gold-deep); }
+.diya-row .diya { filter: drop-shadow(0 2px 6px rgba(200,140,20,.35)); }
+.diya-row .flame { transform-origin: 12px 9px; transform-box: fill-box; animation: flick 1.6s ease-in-out infinite; }
+@keyframes flick { 0%,100% { transform: scale(1) rotate(-2deg); opacity: .95; } 50% { transform: scale(1.12, 1.22) rotate(2deg); opacity: 1; } }
+
+/* events timeline */
+.lux-timeline { display: flex; flex-direction: column; }
+.tl-node { display: flex; gap: 14px; }
+.tl-rail { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
+.tl-dot {
+  width: 44px; height: 44px; border-radius: 50%; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 60%, var(--gold-deep));
+  color: #3a2408; box-shadow: 0 4px 14px rgba(150,100,20,.4), inset 0 1px 3px rgba(255,255,255,.5);
+}
+.tl-line { width: 2px; flex: 1; min-height: 26px; background: linear-gradient(180deg, var(--gold), color-mix(in srgb, var(--gold-deep) 40%, transparent)); }
+.tl-card {
+  flex: 1; margin-bottom: 18px; padding: 14px 15px; border-radius: 14px;
+  background: color-mix(in srgb, var(--paper) 70%, #fff);
+  border: 1px solid color-mix(in srgb, var(--gold-deep) 40%, transparent);
+  box-shadow: 0 8px 20px rgba(120,80,20,.12);
+}
+.tl-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 21px; margin: 0 0 8px; color: var(--paper-text); }
+.tl-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 12.5px; color: var(--paper-muted); font-weight: 600; }
+.tl-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.tl-venue { display: flex; align-items: flex-start; gap: 6px; font-size: 13px; color: var(--paper-muted); margin: 8px 0 0; line-height: 1.5; }
+.tl-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14.5px; color: var(--paper-text); margin: 8px 0 0; line-height: 1.55; }
+.tl-arch { margin-top: 12px; }
+.tl-arch .arch-frame { max-width: 100%; margin: 0; }
+.tl-arch .arch-inner { border-radius: 120px 120px 12px 12px; }
+
+/* venue card */
+.lux-venue-name { font-family: 'Cormorant Garamond', serif; font-size: 30px; text-align: center; margin: 0 0 6px; color: var(--paper-text); }
+.lux-venue-addr { text-align: center; font-size: 14.5px; color: var(--paper-muted); margin: 0 0 16px; line-height: 1.6; }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-deep), var(--gold) 45%, var(--gold-soft));
+  color: #3a2408; box-shadow: 0 10px 26px rgba(150,100,20,.35);
+  width: 100%; margin-bottom: 10px;
+}
+.lux-phone {
+  display: block; text-align: center; font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; letter-spacing: 1px; color: var(--paper-text); text-decoration: none; margin-bottom: 18px;
+}
+.lux-rsvp-head { text-align: center; color: var(--gold-deep); margin: 6px 0 14px; }
+.lux-rsvp-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; letter-spacing: 3px; margin: 8px 0 4px; color: var(--paper-text); }
+.lux-rsvp-head p { font-size: 13px; color: var(--paper-muted); margin: 0; font-style: italic; }
+/* RSVP form on ivory paper */
+.lux-card .gcard { background: rgba(255,255,255,.55); border-color: color-mix(in srgb, var(--gold-deep) 40%, transparent); box-shadow: none; }
+.lux-card .field input, .lux-card .field select, .lux-card .field textarea {
+  background: rgba(255,255,255,.8); border-color: color-mix(in srgb, var(--gold-deep) 45%, transparent); color: var(--paper-text);
+}
+.lux-card .field label { color: var(--paper-muted); }
+.lux-card .seg button { color: var(--paper-text); border-color: color-mix(in srgb, var(--gold-deep) 45%, transparent); }
+.lux-card .seg button.on { background: linear-gradient(135deg, var(--gold-deep), var(--gold)); color: #fff; }
+
+/* music fab icon */
+.fab-music svg { display: block; }
+
+@media (max-width: 380px) {
+  .deck-arrow.left { left: 2px; }
+  .deck-arrow.right { right: 2px; }
+  .lux-card { padding: 26px 18px 22px; }
+  .lux-title { font-size: 18px; letter-spacing: 3px; }
+}
+
+/* reduced motion: luxury anims off */
+@media (prefers-reduced-motion: reduce) {
+  .gold-canvas { display: none; }
+  .shimmer-text { animation: none; }
+  .mandala-spin { animation: none; }
+  .arch-media.kenburns { animation: none; }
+  .arch-sheen { animation: none; }
+  .diya-row .flame { animation: none; }
+  .seal-pulse { animation: none; }
+}
+
+/* ═════════ DESIGNER BACKGROUNDS (layered luxe) ═════════ */
+
+/* Envelope screen: dark cinematic — vignette + gold-foil wash + jaali lattice */
+.envelope-screen {
+  background:
+    radial-gradient(90% 55% at 50% 108%, rgba(0,0,0,.72) 0%, transparent 60%),
+    radial-gradient(70% 45% at 50% -8%, color-mix(in srgb, var(--gold) 16%, transparent) 0%, transparent 60%),
+    radial-gradient(46% 30% at 12% 20%, color-mix(in srgb, var(--gold-deep) 22%, transparent) 0%, transparent 70%),
+    radial-gradient(46% 30% at 88% 78%, color-mix(in srgb, var(--gold-deep) 20%, transparent) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.07'%3E%3Cpath d='M0 72 L72 0 M0 0 L72 72'/%3E%3Ccircle cx='36' cy='36' r='10'/%3E%3Ccircle cx='0' cy='0' r='10'/%3E%3Ccircle cx='72' cy='0' r='10'/%3E%3Ccircle cx='0' cy='72' r='10'/%3E%3Ccircle cx='72' cy='72' r='10'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(120% 80% at 50% 0%, var(--bg2) 0%, transparent 55%),
+    var(--bg);
+}
+.envelope-mandala {
+  position: absolute; top: 50%; left: 50%;
+  width: min(150vw, 760px); height: min(150vw, 760px);
+  transform: translate(-50%, -50%);
+  opacity: 0.10; pointer-events: none; z-index: 0;
+}
+.envelope-wrap { position: relative; z-index: 3; }
+
+/* living glow behind the ganesh idol (pulses even if the video never loads) */
+.env-ganesh-glow {
+  position: absolute; inset: -10px; border-radius: 50%; z-index: 0;
+  background: radial-gradient(circle, rgba(246,226,122,.55) 0%, rgba(212,175,55,.18) 55%, transparent 70%);
+  animation: ganeshGlow 3.6s ease-in-out infinite;
+}
+@keyframes ganeshGlow { 0%,100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.12); opacity: 1; } }
+
+/* Luxury card: champagne ivory + gold filigree frame + jaali lattice + grain */
+.lux-card {
+  background:
+    radial-gradient(120% 60% at 50% 0%, rgba(212,175,55,.14) 0%, transparent 55%),
+    radial-gradient(80% 40% at 50% 100%, rgba(154,123,30,.10) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cg fill='none' stroke='%239a7b1e' stroke-opacity='0.10'%3E%3Cpath d='M32 4 C40 20 44 24 60 32 C44 40 40 44 32 60 C24 44 20 40 4 32 C20 24 24 20 32 4 Z'/%3E%3Ccircle cx='32' cy='32' r='2.5'/%3E%3C/g%3E%3C/svg%3E"),
+    repeating-linear-gradient(0deg, rgba(120,85,30,.030) 0 1px, transparent 1px 4px),
+    linear-gradient(168deg, var(--paper) 0%, #f7ecd4 45%, var(--paper2) 100%);
+}
+/* inner gold filigree border line */
+.lux-card::after {
+  content: ''; position: absolute; inset: 12px; border-radius: 12px; pointer-events: none;
+  border: 1px solid color-mix(in srgb, var(--gold-deep) 35%, transparent);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cg fill='%239a7b1e' fill-opacity='0.16'%3E%3Ccircle cx='4' cy='4' r='1.6'/%3E%3Ccircle cx='36' cy='36' r='1.6'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* venue bless strip */
+.lux-venue-bless { text-align: center; margin-top: 22px; color: var(--gold-deep); }
+.lux-venue-bless p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--paper-text); margin: 10px 0 0; line-height: 1.6; }
+
+/* deck screen gets the same cinematic depth */
+.deck-screen {
+  background:
+    radial-gradient(80% 40% at 50% 110%, rgba(0,0,0,.5) 0%, transparent 60%),
+    radial-gradient(60% 35% at 50% -5%, color-mix(in srgb, var(--gold) 12%, transparent) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72'%3E%3Cg fill='none' stroke='%23d4af37' stroke-opacity='0.05'%3E%3Cpath d='M0 72 L72 0 M0 0 L72 72'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .env-ganesh-glow { animation: none; }
+}
+
+/* ═════════ FIX ROUND — polish, safeguards, new sections ═════════ */
+
+/* Bhanje & Bhatije (family card) */
+.lux-nephews { margin: 20px 0 6px; text-align: center; }
+.lux-nephews-head { display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--gold-deep); margin-bottom: 12px; }
+.lux-nephews-head h4 {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; margin: 0; color: var(--paper-text);
+}
+.lux-nephews ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+.lux-nephews li {
+  display: inline-flex; align-items: baseline; gap: 8px;
+  padding: 8px 16px; border-radius: 999px; max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--gold-deep) 40%, transparent);
+  background: rgba(255,255,255,.55);
+  box-shadow: 0 4px 12px rgba(120,80,20,.10);
+}
+.nep-name { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 700; color: var(--paper-text); overflow-wrap: anywhere; }
+.nep-rel { font-size: 11.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; white-space: nowrap; }
+
+/* Timeline loop videos: natural portrait aspect, capped width, never cropped */
+.tl-arch .arch-frame { max-width: 230px; margin: 0 auto; }
+.tl-arch .arch-inner { border-radius: 120px 120px 12px 12px; }
+
+/* Global media + overflow safeguards */
+video { max-width: 100%; }
+.lux-root, .envelope-screen, .deck-screen { overflow-x: clip; }
+.envelope-scene, .envelope-wrap { max-width: 100%; }
+
+/* Envelope seal: keep it tappable but not covering the names */
+.env-seal-pos { pointer-events: none; }
+.wax-seal { pointer-events: auto; }
+
+/* RSVP head spacing polish */
+.lux-rsvp-head { margin: 22px 0 14px; }
+
+/* Couple names on family card: same overflow discipline as envelope */
+.lux-couple { max-width: 96%; margin-left: auto; margin-right: auto; text-wrap: balance; overflow-wrap: anywhere; }
+.lux-parents, .lux-grandparents { max-width: 96%; margin-left: auto; margin-right: auto; overflow-wrap: anywhere; }
+
+/* Music FAB sits above deck arrows */
+.fab-music { z-index: 70; }
+
+@media (prefers-reduced-motion: reduce) {
+  .env-ganesh-video { transition: none; }
+}
+
+/* Music attribution (CC BY-NC 4.0) */
+.lux-music-credit {
+  margin: 14px auto 0;
+  max-width: 92%;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+  line-height: 1.5;
+}
+
+/* ═════════ ANIMATION PRESETS ═════════
+   The active preset is set as data-anim="<id>" on .lux-root (InvitePage).
+   Presets add/emphasize motion; the base ambiance (gold dust, petals,
+   diyas, mandala, shimmer) always keeps running underneath. */
+
+/* ── Toran garland ── */
+.toran { width: min(430px, 96vw); margin: 0 auto; pointer-events: none; }
+.toran svg { width: 100%; height: auto; display: block; overflow: visible; animation: toranSway 5.5s ease-in-out infinite; transform-origin: 50% 0; }
+@keyframes toranSway { 0%,100% { transform: rotate(-1.4deg); } 50% { transform: rotate(1.4deg); } }
+.env-toran { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); z-index: 4; width: min(430px, 96vw); pointer-events: none; }
+.deck-toran { position: absolute; top: 2px; left: 50%; transform: translateX(-50%); z-index: 4; width: min(430px, 96vw); pointer-events: none; }
+
+/* ── Name unveil: wide letterspacing tightens + gold shimmer sweep.
+   Combined with the base shimmer-text animation (which it extends). */
+.shimmer-text.name-unveil {
+  animation: nameUnveil 1.8s cubic-bezier(.2,.7,.2,1) both, shimmerText 6s linear 1.8s infinite;
+}
+@keyframes nameUnveil {
+  0% { letter-spacing: .42em; opacity: 0; filter: blur(7px); }
+  55% { opacity: 1; filter: blur(0); }
+  100% { letter-spacing: .02em; opacity: 1; filter: blur(0); }
+}
+/* Royal Kiara: the same reveal, refined — softer tracking bloom, no blur,
+   matching the template's elegant typography. */
+[data-anim="royal-kiara"] .shimmer-text.name-unveil {
+  animation: nameUnveilRefined 2.2s cubic-bezier(.2,.7,.2,1) both, shimmerText 6s linear 2.2s infinite;
+}
+@keyframes nameUnveilRefined {
+  0% { letter-spacing: .24em; opacity: 0; }
+  55% { opacity: 1; }
+  100% { letter-spacing: .02em; opacity: 1; }
+}
+
+/* ── Diya glow accents (Royal Kiara / Grand Envelope) + ignite sequence (diya-blessing) ── */
+[data-anim="royal-kiara"] .diya-row .diya,
+[data-anim="grand-envelope"] .diya-row .diya {
+  filter: drop-shadow(0 0 10px rgba(255,190,60,.85)) drop-shadow(0 2px 6px rgba(200,140,20,.35));
+}
+.diya-row.ignite .diya { opacity: .28; filter: grayscale(.55) brightness(.75); transition: opacity .9s ease, filter .9s ease; }
+.diya-row.ignite .flame { opacity: 0; transform: scale(.2); transform-origin: 12px 9px; transform-box: fill-box; transition: opacity .6s ease, transform .6s ease; animation: none; }
+.diya-row.ignite.lit .diya { opacity: 1; filter: none; }
+.diya-row.ignite.lit .flame { opacity: 1; transform: scale(1); animation: flick 1.6s ease-in-out infinite; }
+.diya-blessing-line { animation: blessReveal 1.4s ease .9s both; }
+@keyframes blessReveal { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ── Flip countdown (countdown-flip preset) ── */
+.lux-countdown { margin: 20px 0 6px; text-align: center; }
+.lux-countdown-eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold-deep); font-weight: 700; margin: 0 0 12px; }
+.lux-countdown .flip-row { margin: 0; }
+.lux-countdown .flip-unit { animation: cdPop .55s cubic-bezier(.2,.9,.3,1.35) both; }
+.lux-countdown .flip-unit:nth-child(2) { animation-delay: .08s; }
+.lux-countdown .flip-unit:nth-child(3) { animation-delay: .16s; }
+.lux-countdown .flip-unit:nth-child(4) { animation-delay: .24s; }
+@keyframes cdPop { from { opacity: 0; transform: translateY(18px) scale(.85); } to { opacity: 1; transform: none; } }
+.flip-num.flip-tick { display: inline-block; animation: flipTick .45s ease; backface-visibility: hidden; }
+@keyframes flipTick { 0% { transform: rotateX(88deg); opacity: 0; } 100% { transform: rotateX(0); opacity: 1; } }
+
+/* ── Parallax layers (parallax-story / royal-kiara) ── */
+.px-layer-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; display: none; }
+[data-anim="parallax-story"] .px-layer-wrap,
+[data-anim="royal-kiara"] .px-layer-wrap { display: block; }
+.px-layer { position: absolute; color: var(--gold); opacity: .13; will-change: transform; transform: translateY(calc(var(--scroll-y, 0px) * var(--px-depth, .4))); }
+.px-1 { top: 6%; left: -130px; }
+.px-2 { top: 48%; right: -110px; }
+.px-3 { top: 78%; left: -180px; }
+/* deck-scoped instance: softer, sits behind the cards */
+.px-deck .px-layer { opacity: .1; }
+/* scroll-reveal for card sections (JS adds .px-reveal/.in) */
+[data-anim="parallax-story"] .px-reveal,
+[data-anim="royal-kiara"] .px-reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s ease; }
+[data-anim="parallax-story"] .px-reveal.in,
+[data-anim="royal-kiara"] .px-reveal.in { opacity: 1; transform: none; }
+
+/* ── Extra-images gallery ("Glimpses") — only rendered when non-empty ── */
+.lux-gallery { margin: 22px 0 6px; }
+.lux-gallery-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase; text-align: center;
+  color: var(--paper-text); margin: 0 0 12px;
+}
+.lux-gallery-strip {
+  display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 12px; -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; scrollbar-color: var(--gold-deep) transparent;
+}
+.lux-gthumb {
+  flex: 0 0 auto; width: 108px; height: 108px; border-radius: 12px; overflow: hidden;
+  scroll-snap-align: start; padding: 0; cursor: pointer; background: transparent;
+  border: 2px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  box-shadow: 0 6px 16px rgba(120,80,20,.18);
+}
+.lux-gthumb img { width: 100%; height: 100%; object-fit: cover; }
+.lux-gthumb:active { transform: scale(.96); }
+.lux-lightbox {
+  position: fixed; inset: 0; z-index: 200; background: rgba(10,5,8,.93);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px; animation: lbIn .25s ease;
+}
+@keyframes lbIn { from { opacity: 0; } to { opacity: 1; } }
+.lux-lightbox img { max-width: 100%; max-height: 74vh; border-radius: 12px; border: 2px solid var(--gold); box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+.lux-lightbox p { color: #f6e8c8; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 17px; margin: 12px 0 0; text-align: center; }
+.lux-lb-close {
+  position: absolute; top: 14px; right: 16px; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--gold) 60%, transparent); background: rgba(0,0,0,.4);
+  color: var(--gold-soft); cursor: pointer; display: flex; align-items: center; justify-content: center;
+}
+
+/* ── Petal-rain preset: boosted petal density is applied in JS (Envelope);
+   the hero entrance rise is already handled by framer-motion. ── */
+
+@media (prefers-reduced-motion: reduce) {
+  .toran svg { animation: none; }
+  .shimmer-text.name-unveil,
+  [data-anim="royal-kiara"] .shimmer-text.name-unveil { animation: shimmerText 5s linear infinite; }
+  .diya-blessing-line { animation: none; }
+  .lux-countdown .flip-unit { animation: none; }
+  .flip-num.flip-tick { animation: none; }
+  [data-anim="parallax-story"] .px-reveal,
+  [data-anim="royal-kiara"] .px-reveal { opacity: 1; transform: none; transition: none; }
+  .px-layer { transform: none; }
+}
